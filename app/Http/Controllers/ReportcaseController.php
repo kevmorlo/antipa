@@ -12,8 +12,8 @@ use Illuminate\Support\Facades\Log;
 class reportcaseController extends Controller
 {
     /**
-     * Display a listing of the projects.
-     * Return the inertia view for the projects.
+     * Display a listing of the resource.
+     * If the report cases are successfully found, return a JSON response with the report cases.
      * If an error occurs, log the error and return a JSON response with an error message.
      * @return Json
      * @throws \Exception
@@ -21,7 +21,7 @@ class reportcaseController extends Controller
     public function index()
         {
             try {
-                $reportcases = reportcase::all();
+                $reportcases = Reportcase::all();
                 
                 $data = $reportcases->map(function ($reportcase) {
                     return [
@@ -61,7 +61,7 @@ class reportcaseController extends Controller
      */
     public function store(Request $request)
     {
-        $reportcase = new reportcase();
+        $reportcase = new Reportcase();
 
         $reportcase->totalConfirmed = $request->json->get('totalConfirmed');
         $reportcase->totalDeaths = $request->json->get('totalDeaths');
@@ -83,26 +83,26 @@ class reportcaseController extends Controller
      * Display the specified resource.
      * If the report case is successfully found, return a JSON response with the report case.
      * If an error occurs, log the error and return a JSON response with an error message.
-     * @param reportcase $reportcase
+     * @param Reportcase $reportcase
      * @return Json
      * @throws \Exception
      */
-    public function show(reportcase $reportcase)
+    public function show(Reportcase $reportcase)
     {
-        $reportcase = reportcase::find($reportcase->id);
+        $reportcase = Reportcase::find($reportcase->id);
 
         try {
             return response()->json($reportcase, HttpStatusCodes::HTTP_OK);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return response()->json(['error' => reportcaseStatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(['error' => ReportcaseStatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(reportcase $reportcase)
+    public function edit(Reportcase $reportcase)
     {
         //
     }
@@ -112,13 +112,13 @@ class reportcaseController extends Controller
      * If the report case is successfully updated, return a JSON response with a success message.
      * If an error occurs, log the error and return a JSON response with an error message.
      * @param Request $request
-     * @param reportcase $reportcase
+     * @param Reportcase $reportcase
      * @return Json
      * @throws \Exception
      */
-    public function update(Request $request, reportcase $reportcase)
+    public function update(Request $request, Reportcase $reportcase)
     {
-        $reportcase = reportcase::find($reportcase->id);
+        $reportcase = Reportcase::find($reportcase->id);
 
         try {
             $reportcase->totalConfirmed = $request->json->get('totalConfirmed');
@@ -130,26 +130,31 @@ class reportcaseController extends Controller
 
             $reportcase->save();
 
-            return response()->json(['message' => reportcaseStatusMessages::UPDATE_SUCCESS], HttpStatusCodes::HTTP_OK);
+            return response()->json(['message' => ReportcaseStatusMessages::UPDATE_SUCCESS], HttpStatusCodes::HTTP_OK);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return response()->json(['error' => reportcaseStatusMessages::UPDATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(['error' => ReportcaseStatusMessages::UPDATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 
     /**
      * Remove the specified resource from storage.
+     * If the report case is successfully deleted, return a JSON response with a success message.
+     * If an error occurs, log the error and return a JSON response with an error message.
+     * @param Reportcase $reportcase
+     * @return Json
+     * @throws \Exception
      */
-    public function destroy(reportcase $reportcase)
+    public function destroy(Reportcase $reportcase)
     {
         try {
-            $reportcase = reportcase::find($reportcase->id);
+            $reportcase = Reportcase::find($reportcase->id);
             $reportcase->delete();
 
-            return response()->json(['message' => reportcaseStatusMessages::DELETE_SUCCESS], HttpStatusCodes::HTTP_OK);
+            return response()->json(['message' => ReportcaseStatusMessages::DELETE_SUCCESS], HttpStatusCodes::HTTP_OK);
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return response()->json(['error' => reportcaseStatusMessages::DELETE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(['error' => ReportcaseStatusMessages::DELETE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

@@ -13,12 +13,12 @@ return new class extends Migration
     {
         Schema::create('reportcases', function (Blueprint $table) {
             $table->id();
-            $table->integer('totalConfirmed', 10);
-            $table->integer('totalDeaths', 10);
-            $table->integer('totalActive', 10);
+            $table->integer('totalConfirmed');
+            $table->integer('totalDeaths');
+            $table->integer('totalActive');
             $table->date('dateInfo');
-            $table->foreignId('diseaseId')->constrained('diseases');
-            $table->foreignId('localizationId')->constrained('localizations');
+            $table->foreignId('diseaseId');
+            $table->foreignId('localizationId');
         });
     }
 
