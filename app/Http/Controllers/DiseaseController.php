@@ -6,17 +6,19 @@ use App\Models\Disease;
 use Illuminate\Http\Request;
 use App\Constants\HttpStatusCodes;
 use App\Constants\DiseaseStatusMessages;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\Log;
 
 class DiseaseController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * If the diseases are successfully found, return a JSON response with the diseases.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @return Json
-     * @throws \Exception
+     * @OA\Get(
+     *     path="/api/diseases",
+     *     summary="Récupérer la liste des diseases",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des diseases"
+     *     )
+     * )
      */
     public function index()
     {
@@ -39,27 +41,27 @@ class DiseaseController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * If the disease is successfully saved, return a JSON response with a success message.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Request $request
-     * @return Json
-     * @throws \Exception
+     * @OA\Post(
+     *     path="/api/diseases",
+     *     summary="Créer une nouvelle disease",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="name", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Disease créée avec succès"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
         $disease = new Disease();
 
-        $disease->country = $request->json->get('country');
-        $disease->continent = $request->json->get('continent');
+        $disease->name = $request->json->get('name');
 
         try {
             $disease->save();
@@ -71,12 +73,20 @@ class DiseaseController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * If the disease is successfully found, return a JSON response with the disease.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Disease $disease
-     * @return Json
-     * @throws \Exception
+     * @OA\Get(
+     *     path="/api/diseases/{id}",
+     *     summary="Afficher une disease spécifique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Détails de la disease"
+     *     )
+     * )
      */
     public function show(Disease $disease)
     {
@@ -91,33 +101,34 @@ class DiseaseController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Disease $disease)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * If the disease is successfully updated, return a JSON response with a success message.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Request $request
-     * @param Disease $disease
-     * @return Json
-     * @throws \Exception
+     * @OA\Put(
+     *     path="/api/diseases/{id}",
+     *     summary="Mettre à jour une disease spécifique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="name", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Disease mise à jour avec succès"
+     *     )
+     * )
      */
     public function update(Request $request, Disease $disease)
     {
         $disease = Disease::find($disease->id);
 
         try {
-            $disease->totalConfirmed = $request->json->get('totalConfirmed');
-            $disease->totalDeaths = $request->json->get('totalDeaths');
-            $disease->totalActive = $request->json->get('totalActive');
-            $disease->dateInfo = $request->json->get('dateInfo');
-            $disease->diseaseId = $request->json->get('diseaseId');
-            $disease->diseaseId = $request->json->get('diseaseId');
+            $disease->name = $request->json->get('name');
 
             $disease->save();
 
@@ -129,12 +140,20 @@ class DiseaseController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     * If the disease is successfully deleted, return a JSON response with a success message.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Disease $disease
-     * @return Json
-     * @throws \Exception
+     * @OA\Delete(
+     *     path="/api/diseases/{id}",
+     *     summary="Supprimer une disease spécifique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Disease supprimée avec succès"
+     *     )
+     * )
      */
     public function destroy(Disease $disease)
     {

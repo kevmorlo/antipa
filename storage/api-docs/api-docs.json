@@ -1,0 +1,375 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Antipa API Documentation",
+        "description": "Documentation de l'API Antipa",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/diseases": {
+            "get": {
+                "summary": "Récupérer la liste des diseases",
+                "operationId": "1d8c114c95b03eaae97cd6a1e07fa9e4",
+                "responses": {
+                    "200": {
+                        "description": "Liste des diseases"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Créer une nouvelle disease",
+                "operationId": "31843b1cf4f9f400ab9b5f6529ebb22a",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Disease créée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/diseases/{id}": {
+            "get": {
+                "summary": "Afficher une disease spécifique",
+                "operationId": "a87b653683ba9a7f4417723db7d1214f",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de la disease"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Mettre à jour une disease spécifique",
+                "operationId": "dce80ce3af88550396f356e7f594b15b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Disease mise à jour avec succès"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Supprimer une disease spécifique",
+                "operationId": "f7caca721967626c8b5b7021251f7ee4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Disease supprimée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/localizations": {
+            "get": {
+                "summary": "Récupérer la liste des localizations",
+                "operationId": "ca9d99636d9a01f672483931dc6d6a29",
+                "responses": {
+                    "200": {
+                        "description": "Liste des localizations"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Créer une nouvelle localization",
+                "operationId": "9bf538f408cd2b41a6887a8ee83170f2",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "country": {
+                                        "type": "string"
+                                    },
+                                    "continent": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Localization créée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/localizations/{id}": {
+            "get": {
+                "summary": "Afficher une localization spécifique",
+                "operationId": "78c32ba8ad26b8fa723661a717e10fa5",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails de la localization"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Mettre à jour une localization spécifique",
+                "operationId": "f67cc9330f64e3d718c8d974c7b05e65",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "country": {
+                                        "type": "string"
+                                    },
+                                    "continent": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Localization mise à jour avec succès"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Supprimer une localization spécifique",
+                "operationId": "fbb4f8aead127c93368b29b0d1094b61",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Localization supprimée avec succès"
+                    }
+                }
+            }
+        },
+        "/api/reportcases": {
+            "get": {
+                "summary": "Récupérer la liste des report cases",
+                "operationId": "40d9613a95219c7fd22767510c4f8092",
+                "responses": {
+                    "200": {
+                        "description": "Liste des report cases"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Créer un nouveau report case",
+                "operationId": "1c37349c64ac8635c94bc3bfa45565ff",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "totalConfirmed": {
+                                        "type": "integer"
+                                    },
+                                    "totalDeaths": {
+                                        "type": "integer"
+                                    },
+                                    "totalActive": {
+                                        "type": "integer"
+                                    },
+                                    "dateInfo": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "diseaseId": {
+                                        "type": "integer"
+                                    },
+                                    "localizationId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Report case créé avec succès"
+                    }
+                }
+            }
+        },
+        "/api/reportcases/{id}": {
+            "get": {
+                "summary": "Afficher un report case spécifique",
+                "operationId": "9d1a566ff3f7f1173422418a77ee6eda",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Détails du report case"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Mettre à jour un report case spécifique",
+                "operationId": "fc90568fccf34500ed5118e106caafd1",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "totalConfirmed": {
+                                        "type": "integer"
+                                    },
+                                    "totalDeaths": {
+                                        "type": "integer"
+                                    },
+                                    "totalActive": {
+                                        "type": "integer"
+                                    },
+                                    "dateInfo": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "diseaseId": {
+                                        "type": "integer"
+                                    },
+                                    "localizationId": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Report case mis à jour avec succès"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Supprimer un report case spécifique",
+                "operationId": "e26a6ddacb095790d6e23d15919a90c6",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Report case supprimé avec succès"
+                    }
+                }
+            }
+        }
+    }
+}

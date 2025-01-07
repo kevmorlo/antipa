@@ -2,6 +2,31 @@
 
 use Illuminate\Support\Facades\Route;
 
+// Route pour la page d'accueil
 Route::get('/', function () {
     return view('welcome');
+});
+
+// Groupe de routes pour l'API
+Route::prefix('api')->group(function () {
+    // Routes pour les report cases
+    Route::resource('reportcases', 'ReportcaseController')->except(['create', 'edit']);
+
+    // Routes pour les diseases
+    Route::resource('diseases', 'DiseaseController')->except(['create', 'edit']);
+
+    // Routes pour les localizations
+    Route::resource('localizations', 'LocalizationController')->except(['create', 'edit']);
+
+    // Route pour la page de documentation de l'API
+    Route::get('documentation', function () {
+        $documentation = config('l5-swagger.default');
+        $urlToDocs = route('l5-swagger.default.docs');
+        $operationsSorter = config('l5-swagger.defaults.operations_sort');
+        $configUrl = config('l5-swagger.defaults.additional_config_url');
+        $validatorUrl = config('l5-swagger.defaults.validator_url');
+        $useAbsolutePath = config('l5-swagger.defaults.paths.use_absolute_path');
+
+        return view('l5-swagger::index', compact('documentation', 'urlToDocs', 'operationsSorter', 'configUrl', 'validatorUrl', 'useAbsolutePath'));
+    });
 });

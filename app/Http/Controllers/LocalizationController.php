@@ -6,17 +6,19 @@ use App\Models\Localization;
 use Illuminate\Http\Request;
 use App\Constants\HttpStatusCodes;
 use App\Constants\LocalizationStatusMessages;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Support\Facades\Log;
 
 class LocalizationController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     * If the localizations are successfully found, return a JSON response with the localizations.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @return Json
-     * @throws \Exception
+     * @OA\Get(
+     *     path="/api/localizations",
+     *     summary="Récupérer la liste des localizations",
+     *     @OA\Response(
+     *         response=200,
+     *         description="Liste des localizations"
+     *     )
+     * )
      */
     public function index()
     {
@@ -40,20 +42,22 @@ class LocalizationController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     * If the localization is successfully saved, return a JSON response with a success message.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Request $request
-     * @return Json
-     * @throws \Exception
+     * @OA\Post(
+     *     path="/api/localizations",
+     *     summary="Créer une nouvelle localization",
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="country", type="string"),
+     *             @OA\Property(property="continent", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=201,
+     *         description="Localization créée avec succès"
+     *     )
+     * )
      */
     public function store(Request $request)
     {
@@ -72,12 +76,20 @@ class LocalizationController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     * If the localization is successfully found, return a JSON response with the localization.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Localization $localization
-     * @return Json
-     * @throws \Exception
+     * @OA\Get(
+     *     path="/api/localizations/{id}",
+     *     summary="Afficher une localization spécifique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Détails de la localization"
+     *     )
+     * )
      */
     public function show(Localization $localization)
     {
@@ -92,33 +104,36 @@ class LocalizationController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Localization $localization)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     * If the localization is successfully updated, return a JSON response with a success message.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Request $request
-     * @param Localization $localization
-     * @return Json
-     * @throws \Exception
+     * @OA\Put(
+     *     path="/api/localizations/{id}",
+     *     summary="Mettre à jour une localization spécifique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\RequestBody(
+     *         required=true,
+     *         @OA\JsonContent(
+     *             type="object",
+     *             @OA\Property(property="country", type="string"),
+     *             @OA\Property(property="continent", type="string")
+     *         )
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Localization mise à jour avec succès"
+     *     )
+     * )
      */
     public function update(Request $request, Localization $localization)
     {
         $localization = Localization::find($localization->id);
 
         try {
-            $localization->totalConfirmed = $request->json->get('totalConfirmed');
-            $localization->totalDeaths = $request->json->get('totalDeaths');
-            $localization->totalActive = $request->json->get('totalActive');
-            $localization->dateInfo = $request->json->get('dateInfo');
-            $localization->diseaseId = $request->json->get('diseaseId');
-            $localization->localizationId = $request->json->get('localizationId');
+            $localization->country = $request->json->get('country');
+            $localization->continent = $request->json->get('continent');
 
             $localization->save();
 
@@ -130,12 +145,20 @@ class LocalizationController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
-     * If the localization is successfully deleted, return a JSON response with a success message.
-     * If an error occurs, log the error and return a JSON response with an error message.
-     * @param Localization $localization
-     * @return Json
-     * @throws \Exception
+     * @OA\Delete(
+     *     path="/api/localizations/{id}",
+     *     summary="Supprimer une localization spécifique",
+     *     @OA\Parameter(
+     *         name="id",
+     *         in="path",
+     *         required=true,
+     *         @OA\Schema(type="integer")
+     *     ),
+     *     @OA\Response(
+     *         response=200,
+     *         description="Localization supprimée avec succès"
+     *     )
+     * )
      */
     public function destroy(Localization $localization)
     {
