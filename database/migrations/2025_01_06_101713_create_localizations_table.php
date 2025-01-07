@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('localizations', function (Blueprint $table) {
             $table->id();
-            $table->country();
-            $table->continent();
+            $table->string('country', 45);
+            $table->string('continent', 45);
         });
     }
 

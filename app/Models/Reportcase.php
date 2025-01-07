@@ -12,7 +12,12 @@ class Reportcase extends Model
      * @var array<int, string>
      */
     protected $fillable = [
-        //
+        'totalConfirmed',
+        'totalDeaths',
+        'totalActive',
+        'dateInfo',
+        'diseaseId',
+        'localizationId'
     ];
 
     /**
@@ -32,7 +37,23 @@ class Reportcase extends Model
     protected function casts(): array
     {
         return [
-            //
+            'dateInfo' => 'datetime:Y-m-d',
         ];
+    }
+
+    /**
+     * Get the disease associated with the report case.
+     */
+    public function disease()
+    {
+        return $this->belongsTo(Disease::class, 'diseaseId');
+    }
+
+    /**
+     * Get the localization associated with the report case.
+     */
+    public function localization()
+    {
+        return $this->belongsTo(Localization::class, 'localizationId');
     }
 }
