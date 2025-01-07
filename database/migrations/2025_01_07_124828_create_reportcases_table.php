@@ -17,8 +17,8 @@ return new class extends Migration
             $table->integer('totalDeaths');
             $table->integer('totalActive');
             $table->date('dateInfo');
-            $table->foreignId('diseaseId');
-            $table->foreignId('localizationId');
+            $table->foreignId('diseaseId')->constrained('diseases');
+            $table->foreignId('localizationId')->constrained('localizations');
         });
     }
 
