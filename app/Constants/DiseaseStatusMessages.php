@@ -9,7 +9,7 @@ class DiseaseStatusMessages
     const PERMISSION_ERROR = 'L\'utilisateur n\'a pas la permission de créer une maladie.';
     const UPDATE_ERROR = 'Une erreur est survenue lors de la mise à jour de la maladie. ';
     const DELETE_ERROR = 'Une erreur est survenue lors de la suppression de la maladie. ';
-    const CREATE_SUCCESS = 'maladie créée avec succès.';
-    const UPDATE_SUCCESS = 'maladie mise à jour avec succès.';
-    const DELETE_SUCCESS = 'maladie supprimée avec succès.';
+    const CREATE_SUCCESS = 'Maladie créée avec succès. ';
+    const UPDATE_SUCCESS = 'Maladie mise à jour avec succès. ';
+    const DELETE_SUCCESS = 'Maladie supprimée avec succès. ';
 }

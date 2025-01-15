@@ -6,6 +6,7 @@ Une application web pour explorer les données sur différentes maladies
 - Lucas CHEVALIER : [lucas-chevalier](https://github.com/lucas-chevalier)
 - Josselin LE NAOUR : [MapAwareness](https://github.com/MapAwareness)
 - Noah GRASLAND : [Fungus](https://github.com/Fungus21)
+- Ethan DIVET : [Neell](https://github.com/Neell0)
 
 ## Objectif
 

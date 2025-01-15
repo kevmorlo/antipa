@@ -8,16 +8,19 @@
     "paths": {
         "/api/diseases": {
             "get": {
-                "summary": "Récupérer la liste des diseases",
+                "summary": "Récupérer la liste des maladies",
                 "operationId": "1d8c114c95b03eaae97cd6a1e07fa9e4",
                 "responses": {
                     "200": {
-                        "description": "Liste des diseases"
+                        "description": "Liste des maladies"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de l'affichage des maladies."
                     }
                 }
             },
             "post": {
-                "summary": "Créer une nouvelle disease",
+                "summary": "Créer une nouvelle maladie",
                 "operationId": "31843b1cf4f9f400ab9b5f6529ebb22a",
                 "requestBody": {
                     "required": true,
@@ -36,14 +39,17 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Disease créée avec succès"
+                        "description": "Maladie créée avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la création de la maladie."
                     }
                 }
             }
         },
         "/api/diseases/{id}": {
             "get": {
-                "summary": "Afficher une disease spécifique",
+                "summary": "Afficher une maladie spécifique",
                 "operationId": "a87b653683ba9a7f4417723db7d1214f",
                 "parameters": [
                     {
@@ -57,12 +63,15 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Détails de la disease"
+                        "description": "Détails de la maladie"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de l'affichage de la maladie."
                     }
                 }
             },
             "put": {
-                "summary": "Mettre à jour une disease spécifique",
+                "summary": "Mettre à jour une maladie spécifique",
                 "operationId": "dce80ce3af88550396f356e7f594b15b",
                 "parameters": [
                     {
@@ -91,12 +100,15 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Disease mise à jour avec succès"
+                        "description": "Maladie mise à jour avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la mise à jour de la maladie."
                     }
                 }
             },
             "delete": {
-                "summary": "Supprimer une disease spécifique",
+                "summary": "Supprimer une maladie spécifique",
                 "operationId": "f7caca721967626c8b5b7021251f7ee4",
                 "parameters": [
                     {
@@ -110,23 +122,29 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Disease supprimée avec succès"
+                        "description": "Maladie supprimée avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la suppression de la maladie."
                     }
                 }
             }
         },
         "/api/localizations": {
             "get": {
-                "summary": "Récupérer la liste des localizations",
+                "summary": "Récupérer la liste des localisations",
                 "operationId": "ca9d99636d9a01f672483931dc6d6a29",
                 "responses": {
                     "200": {
-                        "description": "Liste des localizations"
+                        "description": "Liste des localisations"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de l'affichage des localisations."
                     }
                 }
             },
             "post": {
-                "summary": "Créer une nouvelle localization",
+                "summary": "Créer une nouvelle localisation",
                 "operationId": "9bf538f408cd2b41a6887a8ee83170f2",
                 "requestBody": {
                     "required": true,
@@ -148,14 +166,17 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Localization créée avec succès"
+                        "description": "Localisation créée avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la création de la localisation."
                     }
                 }
             }
         },
         "/api/localizations/{id}": {
             "get": {
-                "summary": "Afficher une localization spécifique",
+                "summary": "Afficher une localisation spécifique",
                 "operationId": "78c32ba8ad26b8fa723661a717e10fa5",
                 "parameters": [
                     {
@@ -169,12 +190,15 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Détails de la localization"
+                        "description": "Détails de la localisation"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de l'affichage de la localisation."
                     }
                 }
             },
             "put": {
-                "summary": "Mettre à jour une localization spécifique",
+                "summary": "Mettre à jour une localisation spécifique",
                 "operationId": "f67cc9330f64e3d718c8d974c7b05e65",
                 "parameters": [
                     {
@@ -206,12 +230,15 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Localization mise à jour avec succès"
+                        "description": "Localisation mise à jour avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la mise à jour de la localisation."
                     }
                 }
             },
             "delete": {
-                "summary": "Supprimer une localization spécifique",
+                "summary": "Supprimer une localisation spécifique",
                 "operationId": "fbb4f8aead127c93368b29b0d1094b61",
                 "parameters": [
                     {
@@ -225,23 +252,29 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Localization supprimée avec succès"
+                        "description": "Localisation supprimée avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la suppression de la localisation."
                     }
                 }
             }
         },
         "/api/reportcases": {
             "get": {
-                "summary": "Récupérer la liste des report cases",
+                "summary": "Récupérer la liste des cas reportés",
                 "operationId": "40d9613a95219c7fd22767510c4f8092",
                 "responses": {
                     "200": {
-                        "description": "Liste des report cases"
+                        "description": "Liste des cas reportés"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de l'affichage des cas reportés."
                     }
                 }
             },
             "post": {
-                "summary": "Créer un nouveau report case",
+                "summary": "Créer un nouveau cas reporté",
                 "operationId": "1c37349c64ac8635c94bc3bfa45565ff",
                 "requestBody": {
                     "required": true,
@@ -276,14 +309,17 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Report case créé avec succès"
+                        "description": "Cas reporté créé avec succès."
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la création du cas reporté."
                     }
                 }
             }
         },
         "/api/reportcases/{id}": {
             "get": {
-                "summary": "Afficher un report case spécifique",
+                "summary": "Afficher un cas reporté spécifique",
                 "operationId": "9d1a566ff3f7f1173422418a77ee6eda",
                 "parameters": [
                     {
@@ -297,12 +333,15 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Détails du report case"
+                        "description": "Détails du cas reporté"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de l'affichage du cas reporté."
                     }
                 }
             },
             "put": {
-                "summary": "Mettre à jour un report case spécifique",
+                "summary": "Mettre à jour un cas reporté spécifique",
                 "operationId": "fc90568fccf34500ed5118e106caafd1",
                 "parameters": [
                     {
@@ -347,12 +386,15 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Report case mis à jour avec succès"
+                        "description": "Cas reporté mis à jour avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la mise à jour du cas reporté."
                     }
                 }
             },
             "delete": {
-                "summary": "Supprimer un report case spécifique",
+                "summary": "Supprimer un cas reporté spécifique",
                 "operationId": "e26a6ddacb095790d6e23d15919a90c6",
                 "parameters": [
                     {
@@ -366,7 +408,10 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Report case supprimé avec succès"
+                        "description": "Cas reporté supprimé avec succès"
+                    },
+                    "500": {
+                        "description": "Une erreur est survenue lors de la suppression du cas reporté."
                     }
                 }
             }

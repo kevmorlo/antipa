@@ -9,7 +9,7 @@ class LocalizationStatusMessages
     const PERMISSION_ERROR = 'L\'utilisateur n\'a pas la permission de créer une localisation.';
     const UPDATE_ERROR = 'Une erreur est survenue lors de la mise à jour de la localisation. ';
     const DELETE_ERROR = 'Une erreur est survenue lors de la suppression de la localisation. ';
-    const CREATE_SUCCESS = 'localisation créée avec succès.';
-    const UPDATE_SUCCESS = 'localisation mise à jour avec succès.';
-    const DELETE_SUCCESS = 'localisation supprimée avec succès.';
+    const CREATE_SUCCESS = 'Localisation créée avec succès. ';
+    const UPDATE_SUCCESS = 'Localisation mise à jour avec succès. ';
+    const DELETE_SUCCESS = 'Localisation supprimée avec succès. ';
 }

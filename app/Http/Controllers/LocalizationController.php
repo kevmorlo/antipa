@@ -13,10 +13,14 @@ class LocalizationController extends Controller
     /**
      * @OA\Get(
      *     path="/api/localizations",
-     *     summary="Récupérer la liste des localizations",
+     *     summary="Récupérer la liste des localisations",
      *     @OA\Response(
      *         response=200,
-     *         description="Liste des localizations"
+     *         description="Liste des localisations"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de l'affichage des localisations."
      *     )
      * )
      */
@@ -44,7 +48,7 @@ class LocalizationController extends Controller
     /**
      * @OA\Post(
      *     path="/api/localizations",
-     *     summary="Créer une nouvelle localization",
+     *     summary="Créer une nouvelle localisation",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -55,7 +59,11 @@ class LocalizationController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Localization créée avec succès"
+     *         description="Localisation créée avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la création de la localisation."
      *     )
      * )
      */
@@ -63,8 +71,8 @@ class LocalizationController extends Controller
     {
         $localization = new Localization();
 
-        $localization->country = $request->json->get('country');
-        $localization->continent = $request->json->get('continent');
+        $localization->country = $request->input('country');
+        $localization->continent = $request->input('continent');
 
         try {
             $localization->save();
@@ -78,7 +86,7 @@ class LocalizationController extends Controller
     /**
      * @OA\Get(
      *     path="/api/localizations/{id}",
-     *     summary="Afficher une localization spécifique",
+     *     summary="Afficher une localisation spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -87,7 +95,11 @@ class LocalizationController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Détails de la localization"
+     *         description="Détails de la localisation"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de l'affichage de la localisation."
      *     )
      * )
      */
@@ -106,7 +118,7 @@ class LocalizationController extends Controller
     /**
      * @OA\Put(
      *     path="/api/localizations/{id}",
-     *     summary="Mettre à jour une localization spécifique",
+     *     summary="Mettre à jour une localisation spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -123,7 +135,11 @@ class LocalizationController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Localization mise à jour avec succès"
+     *         description="Localisation mise à jour avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la mise à jour de la localisation."
      *     )
      * )
      */
@@ -132,8 +148,8 @@ class LocalizationController extends Controller
         $localization = Localization::find($localization->id);
 
         try {
-            $localization->country = $request->json->get('country');
-            $localization->continent = $request->json->get('continent');
+            $localization->country = $request->input('country');
+            $localization->continent = $request->input('continent');
 
             $localization->save();
 
@@ -147,7 +163,7 @@ class LocalizationController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/localizations/{id}",
-     *     summary="Supprimer une localization spécifique",
+     *     summary="Supprimer une localisation spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -156,7 +172,11 @@ class LocalizationController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Localization supprimée avec succès"
+     *         description="Localisation supprimée avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la suppression de la localisation."
      *     )
      * )
      */

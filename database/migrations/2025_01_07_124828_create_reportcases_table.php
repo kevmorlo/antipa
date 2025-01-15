@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('dateInfo');
             $table->foreignId('diseaseId')->constrained('diseases');
             $table->foreignId('localizationId')->constrained('localizations');
+            $table->timestamps();
         });
     }
 

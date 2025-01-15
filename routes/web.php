@@ -10,13 +10,22 @@ Route::get('/', function () {
 // Groupe de routes pour l'API
 Route::prefix('api')->group(function () {
     // Routes pour les report cases
-    Route::resource('reportcases', 'ReportcaseController')->except(['create', 'edit']);
+    Route::resource(
+        'reportcases',
+        'App\Http\Controllers\ReportcaseController'
+        )->except(['create', 'edit']);
 
     // Routes pour les diseases
-    Route::resource('diseases', 'DiseaseController')->except(['create', 'edit']);
+    Route::resource(
+        'diseases',
+        'App\Http\Controllers\DiseaseController'
+        )->except(['create', 'edit']);
 
     // Routes pour les localizations
-    Route::resource('localizations', 'LocalizationController')->except(['create', 'edit']);
+    Route::resource(
+        'localizations',
+        'App\Http\Controllers\LocalizationController'
+        )->except(['create', 'edit']);
 
     // Route pour la page de documentation de l'API
     Route::get('documentation', function () {
@@ -27,6 +36,18 @@ Route::prefix('api')->group(function () {
         $validatorUrl = config('l5-swagger.defaults.validator_url');
         $useAbsolutePath = config('l5-swagger.defaults.paths.use_absolute_path');
 
-        return view('l5-swagger::index', compact('documentation', 'urlToDocs', 'operationsSorter', 'configUrl', 'validatorUrl', 'useAbsolutePath'));
+        return view('l5-swagger::index', compact(
+            'documentation',
+            'urlToDocs',
+            'operationsSorter',
+            'configUrl',
+            'validatorUrl',
+            'useAbsolutePath'
+        ));
+    });
+    
+    // Route pour rediriger /api vers /api/documentation
+    Route::get('/', function () {
+        return redirect('/api/documentation');
     });
 });

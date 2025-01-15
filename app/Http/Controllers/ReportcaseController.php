@@ -13,10 +13,14 @@ class ReportcaseController extends Controller
     /**
      * @OA\Get(
      *     path="/api/reportcases",
-     *     summary="Récupérer la liste des report cases",
+     *     summary="Récupérer la liste des cas reportés",
      *     @OA\Response(
      *         response=200,
-     *         description="Liste des report cases"
+     *         description="Liste des cas reportés"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de l'affichage des cas reportés."
      *     )
      * )
      */
@@ -48,7 +52,7 @@ class ReportcaseController extends Controller
     /**
      * @OA\Post(
      *     path="/api/reportcases",
-     *     summary="Créer un nouveau report case",
+     *     summary="Créer un nouveau cas reporté",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -63,7 +67,11 @@ class ReportcaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Report case créé avec succès"
+     *         description="Cas reporté créé avec succès."
+     *     ),
+     *     @OA\Response(
+     *     response=500,
+     *     description="Une erreur est survenue lors de la création du cas reporté."
      *     )
      * )
      */
@@ -71,26 +79,32 @@ class ReportcaseController extends Controller
     {
         $reportcase = new Reportcase();
 
-        $reportcase->totalConfirmed = $request->json->get('totalConfirmed');
-        $reportcase->totalDeaths = $request->json->get('totalDeaths');
-        $reportcase->totalActive = $request->json->get('totalActive');
-        $reportcase->dateInfo = $request->json->get('dateInfo');
-        $reportcase->diseaseId = $request->json->get('diseaseId');
-        $reportcase->localizationId = $request->json->get('localizationId');
+        $reportcase->totalConfirmed = $request->input('totalConfirmed');
+        $reportcase->totalDeaths = $request->input('totalDeaths');
+        $reportcase->totalActive = $request->input('totalActive');
+        $reportcase->dateInfo = $request->input('dateInfo');
+        $reportcase->diseaseId = $request->input('diseaseId');
+        $reportcase->localizationId = $request->input('localizationId');
 
         try {
             $reportcase->save();
-            return response()->json(['message' => ReportcaseStatusMessages::CREATE_SUCCESS], HttpStatusCodes::HTTP_CREATED);
+            return response()->json(
+                ['message' => ReportcaseStatusMessages::CREATE_SUCCESS],
+                HttpStatusCodes::HTTP_CREATED
+            );
         } catch (\Exception $e) {
             Log::error($e->getMessage());
-            return response()->json(['error' => ReportcaseStatusMessages::CREATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+            return response()->json(
+                ['error' => ReportcaseStatusMessages::CREATE_ERROR],
+                HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+            );
         }
     }
 
     /**
      * @OA\Get(
      *     path="/api/reportcases/{id}",
-     *     summary="Afficher un report case spécifique",
+     *     summary="Afficher un cas reporté spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -99,7 +113,11 @@ class ReportcaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Détails du report case"
+     *         description="Détails du cas reporté"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de l'affichage du cas reporté."
      *     )
      * )
      */
@@ -118,7 +136,7 @@ class ReportcaseController extends Controller
     /**
      * @OA\Put(
      *     path="/api/reportcases/{id}",
-     *     summary="Mettre à jour un report case spécifique",
+     *     summary="Mettre à jour un cas reporté spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -139,7 +157,11 @@ class ReportcaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Report case mis à jour avec succès"
+     *         description="Cas reporté mis à jour avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la mise à jour du cas reporté."
      *     )
      * )
      */
@@ -148,12 +170,12 @@ class ReportcaseController extends Controller
         $reportcase = Reportcase::find($reportcase->id);
 
         try {
-            $reportcase->totalConfirmed = $request->json->get('totalConfirmed');
-            $reportcase->totalDeaths = $request->json->get('totalDeaths');
-            $reportcase->totalActive = $request->json->get('totalActive');
-            $reportcase->dateInfo = $request->json->get('dateInfo');
-            $reportcase->diseaseId = $request->json->get('diseaseId');
-            $reportcase->localizationId = $request->json->get('localizationId');
+            $reportcase->totalConfirmed = $request->input('totalConfirmed');
+            $reportcase->totalDeaths = $request->input('totalDeaths');
+            $reportcase->totalActive = $request->input('totalActive');
+            $reportcase->dateInfo = $request->input('dateInfo');
+            $reportcase->diseaseId = $request->input('diseaseId');
+            $reportcase->localizationId = $request->input('localizationId');
 
             $reportcase->save();
 
@@ -167,7 +189,7 @@ class ReportcaseController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/reportcases/{id}",
-     *     summary="Supprimer un report case spécifique",
+     *     summary="Supprimer un cas reporté spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -176,7 +198,11 @@ class ReportcaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Report case supprimé avec succès"
+     *         description="Cas reporté supprimé avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la suppression du cas reporté."
      *     )
      * )
      */

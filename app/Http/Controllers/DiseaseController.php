@@ -13,10 +13,14 @@ class DiseaseController extends Controller
     /**
      * @OA\Get(
      *     path="/api/diseases",
-     *     summary="Récupérer la liste des diseases",
+     *     summary="Récupérer la liste des maladies",
      *     @OA\Response(
      *         response=200,
-     *         description="Liste des diseases"
+     *         description="Liste des maladies"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de l'affichage des maladies."
      *     )
      * )
      */
@@ -43,7 +47,7 @@ class DiseaseController extends Controller
     /**
      * @OA\Post(
      *     path="/api/diseases",
-     *     summary="Créer une nouvelle disease",
+     *     summary="Créer une nouvelle maladie",
      *     @OA\RequestBody(
      *         required=true,
      *         @OA\JsonContent(
@@ -53,7 +57,11 @@ class DiseaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=201,
-     *         description="Disease créée avec succès"
+     *         description="Maladie créée avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la création de la maladie."
      *     )
      * )
      */
@@ -61,7 +69,7 @@ class DiseaseController extends Controller
     {
         $disease = new Disease();
 
-        $disease->name = $request->json->get('name');
+        $disease->name = $request->input('name');
 
         try {
             $disease->save();
@@ -75,7 +83,7 @@ class DiseaseController extends Controller
     /**
      * @OA\Get(
      *     path="/api/diseases/{id}",
-     *     summary="Afficher une disease spécifique",
+     *     summary="Afficher une maladie spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -84,7 +92,11 @@ class DiseaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Détails de la disease"
+     *         description="Détails de la maladie"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de l'affichage de la maladie."
      *     )
      * )
      */
@@ -103,7 +115,7 @@ class DiseaseController extends Controller
     /**
      * @OA\Put(
      *     path="/api/diseases/{id}",
-     *     summary="Mettre à jour une disease spécifique",
+     *     summary="Mettre à jour une maladie spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -119,7 +131,11 @@ class DiseaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Disease mise à jour avec succès"
+     *         description="Maladie mise à jour avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la mise à jour de la maladie."
      *     )
      * )
      */
@@ -128,7 +144,7 @@ class DiseaseController extends Controller
         $disease = Disease::find($disease->id);
 
         try {
-            $disease->name = $request->json->get('name');
+            $disease->name = $request->input('name');
 
             $disease->save();
 
@@ -142,7 +158,7 @@ class DiseaseController extends Controller
     /**
      * @OA\Delete(
      *     path="/api/diseases/{id}",
-     *     summary="Supprimer une disease spécifique",
+     *     summary="Supprimer une maladie spécifique",
      *     @OA\Parameter(
      *         name="id",
      *         in="path",
@@ -151,7 +167,11 @@ class DiseaseController extends Controller
      *     ),
      *     @OA\Response(
      *         response=200,
-     *         description="Disease supprimée avec succès"
+     *         description="Maladie supprimée avec succès"
+     *     ),
+     *     @OA\Response(
+     *         response=500,
+     *         description="Une erreur est survenue lors de la suppression de la maladie."
      *     )
      * )
      */
