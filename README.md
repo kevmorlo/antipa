@@ -16,6 +16,7 @@ Ce projet a été développé dans le cadre d'un exercice académique, en mettan
 ## Langages utilisés
 - PHP
 - JavaScript
+- Python
 
 ## Frameworks utilisés
 - Laravel
