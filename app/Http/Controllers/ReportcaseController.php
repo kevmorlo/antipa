@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Constants\HttpStatusCodes;
 use App\Constants\ReportcaseStatusMessages;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 
 class ReportcaseController extends Controller
 {

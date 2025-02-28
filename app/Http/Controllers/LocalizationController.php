@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Constants\HttpStatusCodes;
 use App\Constants\LocalizationStatusMessages;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 
 class LocalizationController extends Controller
 {

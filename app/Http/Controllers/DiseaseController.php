@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Constants\HttpStatusCodes;
 use App\Constants\DiseaseStatusMessages;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Response;
 
 class DiseaseController extends Controller
 {
