@@ -3,9 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
+Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
-})->middleware('auth:sanctum');
+});
 
 // Route pour la page d'accueil
 Route::get('/', function () {
@@ -18,19 +18,19 @@ Route::prefix('api')->group(function () {
     Route::resource(
         'reportcases',
         'App\Http\Controllers\ReportcaseController'
-    )->except(['create', 'edit']);
+    )->except(['create', 'edit'])->middleware('auth:sanctum');
 
     // Routes pour les diseases
     Route::resource(
         'diseases',
         'App\Http\Controllers\DiseaseController'
-    )->except(['create', 'edit']);
+    )->except(['create', 'edit'])->middleware('auth:sanctum');
 
     // Routes pour les localizations
     Route::resource(
         'localizations',
         'App\Http\Controllers\LocalizationController'
-    )->except(['create', 'edit']);
+    )->except(['create', 'edit'])->middleware('auth:sanctum');
 
     // Route pour la page de documentation de l'API
     Route::get('documentation', function () {

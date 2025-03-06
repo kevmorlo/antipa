@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 /**
  * @OA\Info(
  *      title="Antipa API Documentation",
- *      version="1.0.0",
+ *      version="1.1.0",
  *      description="Documentation de l'API Antipa"
  * )
  */
