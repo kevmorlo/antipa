@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Response;
 /**
  * Ce contrôleur gère les opérations CRUD pour les maladies.
  * Toutes les routes sont protégées par l'authentification Sanctum avec des permissions spécifiques:
- * - disease:view - Pour afficher les maladies
- * - disease:create - Pour créer des maladies
- * - disease:update - Pour mettre à jour des maladies
- * - disease:delete - Pour supprimer des maladies
+ * - LocalizationController::index - Pour afficher les cas
+ * - LocalizationController::store - Pour créer un cas
+ * - LocalizationController::show - Pour afficher un cas spécifique
+ * - LocalizationController::update - Pour mettre à jour un cas (l'utilisateur doit également être le propriétaire)
+ * - LocalizationController::delete - Pour supprimer un cas
  */
 class DiseaseController extends Controller
 {

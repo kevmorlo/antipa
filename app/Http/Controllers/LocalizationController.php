@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Response;
 /**
  * Ce contrôleur gère les opérations CRUD pour les localisations géographiques.
  * Toutes les routes sont protégées par l'authentification Sanctum avec des permissions spécifiques:
- * - localization:view - Pour afficher les localisations
- * - localization:create - Pour créer des localisations
- * - localization:update - Pour mettre à jour des localisations
- * - localization:delete - Pour supprimer des localisations
+ * - LocalizationController::index - Pour afficher les cas
+ * - LocalizationController::store - Pour créer un cas
+ * - LocalizationController::show - Pour afficher un cas spécifique
+ * - LocalizationController::update - Pour mettre à jour un cas (l'utilisateur doit également être le propriétaire)
+ * - LocalizationController::delete - Pour supprimer un cas
  */
 class LocalizationController extends Controller
 {

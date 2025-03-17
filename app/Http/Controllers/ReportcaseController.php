@@ -12,10 +12,11 @@ use Illuminate\Support\Facades\Response;
 /**
  * Ce contrôleur gère les opérations CRUD pour les cas de maladies reportés.
  * Toutes les routes sont protégées par l'authentification Sanctum avec des permissions spécifiques:
- * - reportcase:view - Pour afficher les cas
- * - reportcase:create - Pour créer des cas
- * - reportcase:update - Pour mettre à jour des cas (l'utilisateur doit également être le propriétaire)
- * - reportcase:delete - Pour supprimer des cas
+ * - ReportcaseController::index - Pour afficher les cas
+ * - ReportcaseController::store - Pour créer un cas
+ * - ReportcaseController::show - Pour afficher un cas spécifique
+ * - ReportcaseController::update - Pour mettre à jour un cas (l'utilisateur doit également être le propriétaire)
+ * - ReportcaseController::delete - Pour supprimer un cas
  */
 class ReportcaseController extends Controller
 {
