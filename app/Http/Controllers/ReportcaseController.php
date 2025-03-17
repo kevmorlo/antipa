@@ -81,10 +81,16 @@ class ReportcaseController extends Controller
     
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DISPLAY_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
