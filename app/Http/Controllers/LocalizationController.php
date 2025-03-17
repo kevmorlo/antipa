@@ -69,14 +69,23 @@ class LocalizationController extends Controller
                     ];
                 });
             
-                return response()->json($data, HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    $data,
+                    HttpStatusCodes::HTTP_OK
+                );
     
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DISPLAY_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -130,13 +139,22 @@ class LocalizationController extends Controller
     
             try {
                 $localization->save();
-                return response()->json(['message' => StatusMessages::CREATE_SUCCESS], HttpStatusCodes::HTTP_CREATED);
+                return response()->json(
+                    ['message' => StatusMessages::CREATE_SUCCESS],
+                    HttpStatusCodes::HTTP_CREATED
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::CREATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::CREATE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -188,13 +206,22 @@ class LocalizationController extends Controller
             $localization = Localization::find($localization->id);
     
             try {
-                return response()->json($localization, HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    $localization,
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DISPLAY_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -256,13 +283,22 @@ class LocalizationController extends Controller
     
                 $localization->save();
     
-                return response()->json(['message' => StatusMessages::UPDATE_SUCCESS], HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    ['message' => StatusMessages::UPDATE_SUCCESS],
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::UPDATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::UPDATE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -311,13 +347,22 @@ class LocalizationController extends Controller
                 $localization = Localization::find($localization->id);
                 $localization->delete();
     
-                return response()->json(['message' => StatusMessages::DELETE_SUCCESS], HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    ['message' => StatusMessages::DELETE_SUCCESS],
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DELETE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DELETE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 }

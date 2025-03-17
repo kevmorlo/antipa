@@ -158,7 +158,10 @@ class ReportcaseController extends Controller
                 );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -214,13 +217,22 @@ class ReportcaseController extends Controller
             $reportcase = Reportcase::find($reportcase->id);
     
             try {
-                return response()->json($reportcase, HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    $reportcase,
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DISPLAY_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -290,13 +302,22 @@ class ReportcaseController extends Controller
 
                 $reportcase->save();
 
-                return response()->json(['message' => StatusMessages::UPDATE_SUCCESS], HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    ['message' => StatusMessages::UPDATE_SUCCESS],
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::UPDATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::UPDATE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -345,13 +366,21 @@ class ReportcaseController extends Controller
                 $reportcase = Reportcase::find($reportcase->id);
                 $reportcase->delete();
     
-                return response()->json(['message' => StatusMessages::DELETE_SUCCESS], HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    ['message' => StatusMessages::DELETE_SUCCESS],
+                    HttpStatusCodes::HTTP_OK);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DELETE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DELETE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 }

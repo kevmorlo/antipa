@@ -67,14 +67,23 @@ class DiseaseController extends Controller
                     ];
                 });
             
-                return response()->json($data, HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    $data,
+                    HttpStatusCodes::HTTP_OK
+                );
     
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DISPLAY_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -126,13 +135,22 @@ class DiseaseController extends Controller
     
             try {
                 $disease->save();
-                return response()->json(['message' => StatusMessages::CREATE_SUCCESS], HttpStatusCodes::HTTP_CREATED);
+                return response()->json(
+                    ['message' => StatusMessages::CREATE_SUCCESS],
+                    HttpStatusCodes::HTTP_CREATED
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::CREATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::CREATE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -186,10 +204,16 @@ class DiseaseController extends Controller
                 return response()->json($disease, HttpStatusCodes::HTTP_OK);
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DISPLAY_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DISPLAY_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -249,13 +273,22 @@ class DiseaseController extends Controller
     
                 $disease->save();
     
-                return response()->json(['message' => StatusMessages::UPDATE_SUCCESS], HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    ['message' => StatusMessages::UPDATE_SUCCESS],
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::UPDATE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::UPDATE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 
@@ -304,13 +337,22 @@ class DiseaseController extends Controller
                 $disease = Disease::find($disease->id);
                 $disease->delete();
     
-                return response()->json(['message' => StatusMessages::DELETE_SUCCESS], HttpStatusCodes::HTTP_OK);
+                return response()->json(
+                    ['message' => StatusMessages::DELETE_SUCCESS],
+                    HttpStatusCodes::HTTP_OK
+                );
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
-                return response()->json(['error' => StatusMessages::DELETE_ERROR], HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR);
+                return response()->json(
+                    ['error' => StatusMessages::DELETE_ERROR],
+                    HttpStatusCodes::HTTP_INTERNAL_SERVER_ERROR
+                );
             }
         } else {
-            return response()->json(['message' => StatusMessages::FORBIDDEN_ERROR], HttpStatusCodes::HTTP_FORBIDDEN);
+            return response()->json(
+                ['message' => StatusMessages::FORBIDDEN_ERROR],
+                HttpStatusCodes::HTTP_FORBIDDEN
+            );
         }
     }
 }
