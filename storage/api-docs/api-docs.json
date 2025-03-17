@@ -3,33 +3,75 @@
     "info": {
         "title": "Antipa API Documentation",
         "description": "Documentation de l'API Antipa",
-        "version": "1.0.0"
+        "version": "1.1.0"
     },
     "paths": {
         "/api/diseases": {
             "get": {
+                "tags": [
+                    "Diseases"
+                ],
                 "summary": "Récupérer la liste des maladies",
+                "description": "Récupère toutes les maladies disponibles dans le système",
                 "operationId": "1d8c114c95b03eaae97cd6a1e07fa9e4",
                 "responses": {
                     "200": {
-                        "description": "Liste des maladies"
+                        "description": "Liste des maladies",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "Id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "Name": {
+                                                "type": "string",
+                                                "example": "COVID-19"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à afficher les maladies."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de l'affichage des maladies."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
+                "tags": [
+                    "Diseases"
+                ],
                 "summary": "Créer une nouvelle maladie",
+                "description": "Crée une nouvelle entrée de maladie avec les données fournies",
                 "operationId": "31843b1cf4f9f400ab9b5f6529ebb22a",
                 "requestBody": {
+                    "description": "Données de la maladie à créer",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "name"
+                                ],
                                 "properties": {
                                     "name": {
-                                        "type": "string"
+                                        "description": "Nom de la maladie",
+                                        "type": "string",
+                                        "example": "Grippe H1N1"
                                     }
                                 },
                                 "type": "object"
@@ -39,22 +81,48 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Maladie créée avec succès"
+                        "description": "Maladie créée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La maladie a été créée avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à créer une maladie."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la création de la maladie."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/diseases/{id}": {
             "get": {
+                "tags": [
+                    "Diseases"
+                ],
                 "summary": "Afficher une maladie spécifique",
+                "description": "Retourne les détails d'une maladie spécifique",
                 "operationId": "a87b653683ba9a7f4417723db7d1214f",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la maladie à afficher",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -63,20 +131,58 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Détails de la maladie"
+                        "description": "Détails de la maladie",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "COVID-19"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à afficher une maladie."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de l'affichage de la maladie."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
+                "tags": [
+                    "Diseases"
+                ],
                 "summary": "Mettre à jour une maladie spécifique",
+                "description": "Met à jour les données d'une maladie existante",
                 "operationId": "dce80ce3af88550396f356e7f594b15b",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la maladie à mettre à jour",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -84,13 +190,15 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "Nouvelles données de la maladie",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
                                     "name": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "COVID-19 variant"
                                     }
                                 },
                                 "type": "object"
@@ -100,20 +208,46 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Maladie mise à jour avec succès"
+                        "description": "Maladie mise à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La maladie a été mise à jour avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à mettre à jour la maladie."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la mise à jour de la maladie."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
+                "tags": [
+                    "Diseases"
+                ],
                 "summary": "Supprimer une maladie spécifique",
+                "description": "Supprime définitivement une maladie existante",
                 "operationId": "f7caca721967626c8b5b7021251f7ee4",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la maladie à supprimer",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -122,41 +256,111 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Maladie supprimée avec succès"
+                        "description": "Maladie supprimée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La maladie a été supprimée avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à supprimer la maladie."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la suppression de la maladie."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/localizations": {
             "get": {
+                "tags": [
+                    "Localizations"
+                ],
                 "summary": "Récupérer la liste des localisations",
+                "description": "Récupère toutes les localisations géographiques disponibles dans le système",
                 "operationId": "ca9d99636d9a01f672483931dc6d6a29",
                 "responses": {
                     "200": {
-                        "description": "Liste des localisations"
+                        "description": "Liste des localisations",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "Id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "Country": {
+                                                "type": "string",
+                                                "example": "France"
+                                            },
+                                            "Continent": {
+                                                "type": "string",
+                                                "example": "Europe"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à afficher les localisations."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de l'affichage des localisations."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
+                "tags": [
+                    "Localizations"
+                ],
                 "summary": "Créer une nouvelle localisation",
+                "description": "Crée une nouvelle entrée de localisation géographique avec les données fournies",
                 "operationId": "9bf538f408cd2b41a6887a8ee83170f2",
                 "requestBody": {
+                    "description": "Données de la localisation à créer",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "country",
+                                    "continent"
+                                ],
                                 "properties": {
                                     "country": {
-                                        "type": "string"
+                                        "description": "Nom du pays",
+                                        "type": "string",
+                                        "example": "Allemagne"
                                     },
                                     "continent": {
-                                        "type": "string"
+                                        "description": "Nom du continent",
+                                        "type": "string",
+                                        "example": "Europe"
                                     }
                                 },
                                 "type": "object"
@@ -166,22 +370,48 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Localisation créée avec succès"
+                        "description": "Localisation créée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La localisation a été créée avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à créer une localisation."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la création de la localisation."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/localizations/{id}": {
             "get": {
+                "tags": [
+                    "Localizations"
+                ],
                 "summary": "Afficher une localisation spécifique",
+                "description": "Retourne les détails d'une localisation géographique spécifique",
                 "operationId": "78c32ba8ad26b8fa723661a717e10fa5",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la localisation à afficher",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -190,20 +420,62 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Détails de la localisation"
+                        "description": "Détails de la localisation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "country": {
+                                            "type": "string",
+                                            "example": "France"
+                                        },
+                                        "continent": {
+                                            "type": "string",
+                                            "example": "Europe"
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à afficher une localisation."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de l'affichage de la localisation."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
+                "tags": [
+                    "Localizations"
+                ],
                 "summary": "Mettre à jour une localisation spécifique",
+                "description": "Met à jour les données d'une localisation géographique existante",
                 "operationId": "f67cc9330f64e3d718c8d974c7b05e65",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la localisation à mettre à jour",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -211,16 +483,19 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "Nouvelles données de la localisation",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
                                     "country": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "Italie"
                                     },
                                     "continent": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "example": "Europe"
                                     }
                                 },
                                 "type": "object"
@@ -230,20 +505,46 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Localisation mise à jour avec succès"
+                        "description": "Localisation mise à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La localisation a été mise à jour avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à mettre à jour la localisation."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la mise à jour de la localisation."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
+                "tags": [
+                    "Localizations"
+                ],
                 "summary": "Supprimer une localisation spécifique",
+                "description": "Supprime définitivement une localisation géographique existante",
                 "operationId": "fbb4f8aead127c93368b29b0d1094b61",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID de la localisation à supprimer",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -252,54 +553,153 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Localisation supprimée avec succès"
+                        "description": "Localisation supprimée avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "La localisation a été supprimée avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à supprimer la localisation."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la suppression de la localisation."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/reportcases": {
             "get": {
+                "tags": [
+                    "Reportcases"
+                ],
                 "summary": "Récupérer la liste des cas reportés",
+                "description": "Récupère tous les cas de maladie reportés disponibles dans le système",
                 "operationId": "40d9613a95219c7fd22767510c4f8092",
                 "responses": {
                     "200": {
-                        "description": "Liste des cas reportés"
+                        "description": "Liste des cas reportés",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "Id": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "TotalConfirmed": {
+                                                "type": "integer",
+                                                "example": 100
+                                            },
+                                            "TotalDeaths": {
+                                                "type": "integer",
+                                                "example": 10
+                                            },
+                                            "TotalActive": {
+                                                "type": "integer",
+                                                "example": 90
+                                            },
+                                            "DateInfo": {
+                                                "type": "string",
+                                                "format": "date",
+                                                "example": "2025-01-15"
+                                            },
+                                            "DiseaseId": {
+                                                "type": "integer",
+                                                "example": 1
+                                            },
+                                            "LocalizationId": {
+                                                "type": "integer",
+                                                "example": 2
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à afficher les cas reportés."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de l'affichage des cas reportés."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "post": {
+                "tags": [
+                    "Reportcases"
+                ],
                 "summary": "Créer un nouveau cas reporté",
+                "description": "Crée un nouveau cas de maladie reporté avec les données fournies",
                 "operationId": "1c37349c64ac8635c94bc3bfa45565ff",
                 "requestBody": {
+                    "description": "Données du cas reporté à créer",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
+                                "required": [
+                                    "totalConfirmed",
+                                    "totalDeaths",
+                                    "totalActive",
+                                    "dateInfo",
+                                    "diseaseId",
+                                    "localizationId"
+                                ],
                                 "properties": {
                                     "totalConfirmed": {
-                                        "type": "integer"
+                                        "description": "Nombre total de cas confirmés",
+                                        "type": "integer",
+                                        "example": 100
                                     },
                                     "totalDeaths": {
-                                        "type": "integer"
+                                        "description": "Nombre total de décès",
+                                        "type": "integer",
+                                        "example": 10
                                     },
                                     "totalActive": {
-                                        "type": "integer"
+                                        "description": "Nombre total de cas actifs",
+                                        "type": "integer",
+                                        "example": 90
                                     },
                                     "dateInfo": {
+                                        "description": "Date de l'information",
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "example": "2025-01-15"
                                     },
                                     "diseaseId": {
-                                        "type": "integer"
+                                        "description": "ID de la maladie concernée",
+                                        "type": "integer",
+                                        "example": 1
                                     },
                                     "localizationId": {
-                                        "type": "integer"
+                                        "description": "ID de la localisation géographique",
+                                        "type": "integer",
+                                        "example": 2
                                     }
                                 },
                                 "type": "object"
@@ -309,22 +709,48 @@
                 },
                 "responses": {
                     "201": {
-                        "description": "Cas reporté créé avec succès."
+                        "description": "Cas reporté créé avec succès.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Le cas reporté a été créé avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à créer un cas reporté."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la création du cas reporté."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         },
         "/api/reportcases/{id}": {
             "get": {
+                "tags": [
+                    "Reportcases"
+                ],
                 "summary": "Afficher un cas reporté spécifique",
+                "description": "Retourne les détails d'un cas reporté spécifique",
                 "operationId": "9d1a566ff3f7f1173422418a77ee6eda",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID du cas reporté à afficher",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -333,20 +759,79 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Détails du cas reporté"
+                        "description": "Détails du cas reporté",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "totalConfirmed": {
+                                            "type": "integer",
+                                            "example": 100
+                                        },
+                                        "totalDeaths": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "totalActive": {
+                                            "type": "integer",
+                                            "example": 90
+                                        },
+                                        "dateInfo": {
+                                            "type": "string",
+                                            "format": "date",
+                                            "example": "2025-01-15"
+                                        },
+                                        "diseaseId": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "localizationId": {
+                                            "type": "integer",
+                                            "example": 2
+                                        },
+                                        "created_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        },
+                                        "updated_at": {
+                                            "type": "string",
+                                            "format": "date-time"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à afficher un cas reporté."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de l'affichage du cas reporté."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "put": {
+                "tags": [
+                    "Reportcases"
+                ],
                 "summary": "Mettre à jour un cas reporté spécifique",
+                "description": "Met à jour les données d'un cas reporté existant",
                 "operationId": "fc90568fccf34500ed5118e106caafd1",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID du cas reporté à mettre à jour",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -354,29 +839,36 @@
                     }
                 ],
                 "requestBody": {
+                    "description": "Nouvelles données du cas reporté",
                     "required": true,
                     "content": {
                         "application/json": {
                             "schema": {
                                 "properties": {
                                     "totalConfirmed": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "example": 150
                                     },
                                     "totalDeaths": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "example": 15
                                     },
                                     "totalActive": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "example": 135
                                     },
                                     "dateInfo": {
                                         "type": "string",
-                                        "format": "date"
+                                        "format": "date",
+                                        "example": "2025-01-20"
                                     },
                                     "diseaseId": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "example": 1
                                     },
                                     "localizationId": {
-                                        "type": "integer"
+                                        "type": "integer",
+                                        "example": 2
                                     }
                                 },
                                 "type": "object"
@@ -386,20 +878,46 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Cas reporté mis à jour avec succès"
+                        "description": "Cas reporté mis à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Le cas reporté a été mis à jour avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à mettre à jour le cas reporté."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la mise à jour du cas reporté."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             },
             "delete": {
+                "tags": [
+                    "Reportcases"
+                ],
                 "summary": "Supprimer un cas reporté spécifique",
+                "description": "Supprime définitivement un cas reporté existant",
                 "operationId": "e26a6ddacb095790d6e23d15919a90c6",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
+                        "description": "ID du cas reporté à supprimer",
                         "required": true,
                         "schema": {
                             "type": "integer"
@@ -408,13 +926,48 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Cas reporté supprimé avec succès"
+                        "description": "Cas reporté supprimé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Le cas reporté a été supprimé avec succès."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Non autorisé à supprimer un cas reporté."
                     },
                     "500": {
                         "description": "Une erreur est survenue lors de la suppression du cas reporté."
                     }
-                }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
             }
         }
-    }
+    },
+    "tags": [
+        {
+            "name": "Diseases",
+            "description": "Diseases"
+        },
+        {
+            "name": "Localizations",
+            "description": "Localizations"
+        },
+        {
+            "name": "Reportcases",
+            "description": "Reportcases"
+        }
+    ]
 }
