@@ -55,12 +55,12 @@ function handleImageError() {
                         >
                             À propos
                         </Link>
-                        <link
+                        <Link
                         href="/resources/js/Pages/Dashboard.vue"
                         class="px-3 py-2 rounded-md text-sm font-medium text-gray-700 hover:text-green-600 hover:bg-gray-50"
                         >
                             Tableau de bord
-                        </link>
+                        </Link>
 
                     </div>
 
