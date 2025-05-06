@@ -1,5 +1,7 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import { onMounted, ref } from 'vue';
+import Plotly from 'plotly.js-dist-min';
 
 defineProps({
     canLogin: {
@@ -24,6 +26,20 @@ function handleImageError() {
     document.getElementById('docs-card-content')?.classList.add('!flex-row');
     document.getElementById('background')?.classList.add('!hidden');
 }
+
+const plotlyChart = ref(null)
+
+onMounted(() => {
+  const data = [
+    {
+      x: [1, 2, 3, 4],
+      y: [10, 15, 13, 17],
+      type: 'scatter'
+    }
+  ]
+
+  Plotly.newPlot(plotlyChart.value, data)
+})
 </script>
 
 <template>
@@ -110,9 +126,13 @@ function handleImageError() {
                     <div class="bg-white rounded-lg shadow-lg p-6">
                         <h3 class="text-xl font-semibold mb-4">Nombre de mort</h3>
                         <div class="aspect-w-16 aspect-h-9 bg-gray-100 rounded-lg">
-                            <!-- Placeholder pour le diagramme 2 -->
-                            <div class="flex items-center justify-center h-64">
-                                <span class="text-gray-500">Graphique 2</span>
+                            <div id="MyDiv">
+                                <template>
+                                    <div ref="plotlyChart" style="width:100%;height:400px;"></div>
+                                </template>
+                                <div class="flex items-center justify-center h-64">
+                                    <span class="text-gray-500">Graphique 2</span>
+                                </div>
                             </div>
                         </div>
                     </div>
