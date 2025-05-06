@@ -38,7 +38,7 @@ Ce projet a été développé dans le cadre d'un exercice académique, en mettan
 git clone git@github.com:kevmorlo/antipa.git
 ```
 2. Installez les dépendances :
-```bash
+```bashnvm
 composer install
 npm install
 ```
