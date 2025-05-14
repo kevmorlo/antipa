@@ -33,7 +33,7 @@ Ce projet a été développé dans le cadre d'un exercice académique, en mettan
 - MySQL ou MariaDB
 
 ### Installation
-1. Clonez le dépôt 
+1. Clonez le dépôt
 ```bash
 git clone git@github.com:kevmorlo/antipa.git
 ```
@@ -50,7 +50,7 @@ cp .env.example .env
 ```bash
 php artisan key:generate
 ```
-5. Migrez la base de données et les Seeders : 
+5. Migrez la base de données et les Seeders :
 ```bash
 php artisan migrate --seed
 ```
